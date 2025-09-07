@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ATTHOTA JYOTHIKA — Portfolio</title>
+  <meta name="description" content="Portfolio of Atthota Jyothika — AI/ML Enthusiast @ web development. Projects, experience, and contact." />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="theme-color" content="#0f172a" />
+  <style>
+    :root{
+      --bg: #ffffff;
+      --fg: #0f172a;
+      --muted: #475569;
+      --accent: #0a192f;
+      --brand-1: #0ea5e9;
+      --brand-2: #6366f1;
+      --card: #f8fafc;
+      --border: #e2e8f0;
+      --shadow: 0 10px 30px rgba(2,6,23,.08);
+      --radius: 14px;
+      --maxw: 1100px;
+    }
+    @media (prefers-color-scheme: dark){
+      :root{
+        --bg: #0b1220;
+        --fg: #e5e7eb;
+        --muted: #93a3b8;
+        --accent: #f1f5f9;
+        --brand-1: #38bdf8;
+        --brand-2: #818cf8;
+        --card: #0f172a;
+        --border: #1f2937;
+        --shadow: 0 10px 30px rgba(0,0,0,.35);
+      }
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0; font:16px/1.6 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; color:var(--fg); background:var(--bg)}
+    a{color:var(--brand-2); text-decoration:none}
+    a:hover{text-decoration:underline}
+    .container{max-width:var(--maxw); margin-inline:auto; padding:24px}
+
+    header{position:sticky; top:0; z-index:50; border-bottom:1px solid var(--border); backdrop-filter:saturate(180%) blur(10px); background:linear-gradient(120deg, color-mix(in oklab, var(--bg), var(--brand-1) 6%), color-mix(in oklab, var(--bg), var(--brand-2) 6%));}
+    .nav{display:flex; align-items:center; justify-content:space-between; gap:24px}
+    .brand{display:flex; align-items:center; gap:12px; font-weight:700; letter-spacing:.2px}
+    .brand .dot{width:12px; height:12px; border-radius:999px; background:linear-gradient(135deg, var(--brand-1), var(--brand-2)); box-shadow:0 0 0 6px color-mix(in oklab, var(--brand-1), transparent 80%)}
+    nav ul{display:flex; gap:18px; list-style:none; margin:0; padding:0}
+    nav a{color:var(--fg); opacity:.85; font-weight:600}
+    nav a[aria-current="page"], nav a:hover{opacity:1}
+    .toggle{border:1px solid var(--border); background:var(--card); padding:8px 12px; border-radius:999px; cursor:pointer}
+
+    .hero{padding:64px 0 32px; display:grid; gap:24px; align-items:center}
+    @media(min-width:900px){.hero{grid-template-columns:1.2fr .8fr}}
+    .hero h1{font-size:clamp(28px, 5vw, 44px); line-height:1.15; margin:0 0 12px; color:var(--accent)}
+    .hero p{max-width:740px; color:var(--muted); margin:0}
+    .meta{display:flex; flex-wrap:wrap; gap:12px; margin-top:18px; color:var(--muted)}
+    .meta span{display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border:1px solid var(--border); border-radius:999px; background:var(--card)}
+    .photo-wrap{display:flex; justify-content:center}
+    .photo{width:320px; height:380px; border-radius:30%/28%; overflow:hidden; border:6px solid color-mix(in oklab, var(--brand-1), transparent 70%); box-shadow:0 18px 40px rgba(0,0,0,.18); animation:float 5s ease-in-out infinite}
+    .photo img{width:100%; height:100%; object-fit:cover}
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+
+    section{padding:32px 0}
+    h2{font-size:clamp(20px, 3vw, 28px); margin:0 0 16px; color:var(--accent)}
+    .grid{display:grid; gap:18px}
+    @media(min-width:800px){ .grid.cols-2{grid-template-columns:1fr 1fr} .grid.cols-3{grid-template-columns:repeat(3, 1fr)} }
+
+    .card{background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:18px; box-shadow:var(--shadow); transition:transform .25s ease, box-shadow .25s ease}
+    .card:hover{transform:translateY(-4px); box-shadow:0 18px 40px rgba(2,6,23,.12)}
+    .card h3{margin:0 0 6px; font-size:18px}
+    .card .sub{color:var(--muted); font-size:14px; margin-bottom:8px}
+    .card ul{margin:8px 0 0 18px}
+
+    .timeline{position:relative; padding-left:20px}
+    .timeline:before{content:""; position:absolute; left:8px; top:6px; bottom:6px; width:2px; background:var(--border)}
+    .t-item{position:relative; margin:0 0 18px; padding-left:18px}
+    .t-item:before{content:""; position:absolute; left:-1px; top:.4em; width:10px; height:10px; background:linear-gradient(135deg, var(--brand-1), var(--brand-2)); border-radius:50%}
+
+    .tags{display:flex; flex-wrap:wrap; gap:8px}
+    .tag{padding:6px 10px; border:1px solid var(--border); border-radius:999px; background:var(--bg); color:var(--muted); font-size:14px}
+
+    footer{padding:36px 0; border-top:1px solid var(--border); color:var(--muted)}
+
+    [data-animate]{opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease}
+    [data-animate].visible{opacity:1; transform:translateY(0)}
+
+    .filters{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:8px}
+    .filter-btn{border:1px solid var(--border); background:var(--card); padding:8px 12px; border-radius:999px; cursor:pointer}
+    .filter-btn[aria-pressed="true"]{outline:2px solid var(--brand-2)}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand"><span class="dot"></span><span>ATTHOTA JYOTHIKA</span></div>
+      <nav aria-label="Primary">
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#certs">Certifications</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <button class="toggle" id="themeToggle" aria-label="Toggle theme">🌓</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="intro-title" data-animate>
+      <div>
+        <h1 id="intro-title">"AI/ML Explorer | Web Creator | Data Problem Solver"</h1>
+        <p>"Exploring AI/ML to build smarter applications.Designing web solutions and analyzing data for real-world impact."</p>
+        <div class="meta" id="badges"></div>
+      </div>
+      <div class="photo-wrap">
+        <div class="photo"><img src="https://avatars.githubusercontent.com/u/115601283?v=4" alt="Atthota Jyothika"></div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" data-animate>
+      <h2>About Me</h2>
+      <div id="aboutMe"></div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" data-animate>
+      <h2>Skills</h2>
+      <div id="skillsList" class="tags"></div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" data-animate>
+      <h2>Experience</h2>
+      <div class="timeline" id="experienceList"></div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" data-animate>
+      <h2>Projects</h2>
+      <div class="filters">
+        <button class="filter-btn" data-filter="all" aria-pressed="true">All</button>
+        <button class="filter-btn" data-filter="Web">Web</button>
+        <button class="filter-btn" data-filter="AI/ML">AI/ML</button>
+        <button class="filter-btn" data-filter="Data">Data</button>
+      </div>
+      <div class="grid cols-2" id="projectsList"></div>
+    </section>
+
+    <!-- CERTIFICATIONS -->
+    <section id="certs" data-animate>
+      <h2>Certifications & Online Courses</h2>
+      <ul id="certsList"></ul>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" data-animate>
+      <h2>Contact</h2>
+      <div id="contactInfo"></div>
+    </section>
+  </main>
+
+  <footer class="container">
+    © 2025 Atthota Jyothika. All rights reserved.
+  </footer>
+
+  <script>
+    const DATA = {
+      location: 'Hyderabad',
+      email: 'jyothikachowdary625@gmail.com',
+      linkedin: 'https://www.linkedin.com/in/jyothika-atthota-17775a2a6',
+      github: 'https://github.com/JyothikaAtthota/',
+      badges: [
+        { icon: '📍', text: 'Hyderabad' },
+        { icon: '💼', text: 'AI/ML Enthusiast & Software Developer' },
+        { icon: '📧', html: `<a href="mailto:jyothikachowdary625@gmail.com">jyothikachowdary625@gmail.com</a>` },
+        { icon: '🔗', html: `<a href="${'https://www.linkedin.com/in/jyothika-atthota-17775a2a6'}" target="_blank" rel="noopener">LinkedIn</a> · <a href="${'https://github.com/JyothikaAtthota/'}" target="_blank" rel="noopener">GitHub</a>` },
+      ],
+      about: [
+        'I am a B.Tech (CSM) student with a strong interest in software development and AI/ML.',
+        'I enjoy learning new technologies, working on projects, and improving my coding skills.'
+      ],
+      skills: {
+        Programming: ['Python', 'Java', 'C'],
+        Web: ['HTML', 'CSS', 'JavaScript', 'React'],
+        'Data & Tools': ['AI/ML', 'Data Visualization', 'Excel', 'PowerBI']
+      },
+      experience: [
+        {
+          title: 'Web Development Intern',
+          org: 'ApexPlanet',
+          when: 'Aug 2025 – Sept 2025',
+          bullets: [
+            'Developed responsive web applications using HTML, CSS, JavaScript, and React.',
+            'Collaborated with mentors to improve coding practices and deployment workflows.'
+          ]
+        },
+        {
+          title: 'Software Development Intern',
+          org: 'Cognifyze Technologies',
+          when: 'May 2025 – Jun 2025',
+          bullets: [
+            'Worked on backend development tasks and mini-projects using Python and databases.',
+            'Practiced problem-solving and code optimization for real-world use cases.'
+          ]
+        },
+        {
+          title: 'Data Analyst Intern',
+          org: 'Elevate Labs',
+          when: 'Jun 2025 – Jul 2025',
+          bullets: [
+            'Analyzed structured/unstructured datasets using Python, Pandas, and NumPy.',
+            'Created data visualizations with Matplotlib and Plotly to present insights.'
+          ]
+        }
+      ],
+      projects: [
+        {
+          name: 'Library Management System',
+          tech: 'Java, Spring Boot, MySQL',
+          cat: 'Web',
+          desc: 'Full-stack system to manage book inventory, student records, and transactions with secure role-based access.'
+        },
+        {
+          name: 'Chatbot for Medical Diagnosis',
+          tech: 'Python, NLP, ML',
+          cat: 'AI/ML',
+          desc: 'AI-powered chatbot to assist users with medical queries, symptom analysis, and health suggestions.'
+        },
+        {
+          name: 'To-Do List Application',
+          tech: 'HTML, CSS, JavaScript (React optional)',
+          cat: 'Web',
+          desc: 'Built a task management app allowing users to add, update, and delete tasks with a clean user interface.'
+        },
+        {
+          name: 'Climate Risk Disaster Management',
+          tech: 'Python, Pandas, Scikit-learn, Data Visualization',
+          cat: 'AI/ML · Data',
+          desc: 'Analyzed climate risk patterns and developed ML models for disaster prediction and management with visual dashboards.'
+        }
+      ],
+      certs: [
+        'Python Fundamentals – Infosys Springboard',
+        'Machine Learning Fundamentals – Infosys Springboard',
+        'Neural Networks – Infosys Springboard',
+        'Data Science and Analytics – HP Life',
+        'Introduction to Generative AI – simplilearn SKiLLUP',
+        'Responsible AI: Applying AI Principles with Google Cloud – simplilearn SKiLLUP',
+        'Technology Job Simulation – Deloitte',
+        'Data Analytics Job Simulation – TATA',
+        'Software Engineering Job Simulation – Accenture Nordics',
+        '"TCS NQT — 59% (Programming & Aptitude Assessment)"'
+      ]
+    };
+
+    // Render badges
+    const badgesEl = document.getElementById('badges');
+    DATA.badges.forEach(b => {
+      const span = document.createElement('span');
+      if(b.html){ span.innerHTML = b.html; } else { span.textContent = `${b.icon} ${b.text}`; }
+      badgesEl.appendChild(span);
+    });
+
+    // About
+    const aboutEl = document.getElementById('aboutMe');
+    DATA.about.forEach(p => {
+      const para = document.createElement('p'); para.textContent = p; aboutEl.appendChild(para);
+    });
+
+    // Skills
+    const skillsEl = document.getElementById('skillsList');
+    Object.values(DATA.skills).flat().forEach(s => {
+      const span = document.createElement('span'); span.className='tag'; span.textContent=s; skillsEl.appendChild(span);
+    });
+
+    // Experience
+    const expEl = document.getElementById('experienceList');
+    DATA.experience.forEach(e=>{
+      const div = document.createElement('div'); div.className='t-item';
+      div.innerHTML=`<h3>${e.title}</h3><p class="sub">${e.org} · ${e.when}</p><ul>${e.bullets.map(b=>`<li>${b}</li>`).join('')}</ul>`;
+      expEl.appendChild(div);
+    });
+
+    // Projects
+    const projectsEl = document.getElementById('projectsList');
+    function renderProjects(filter='all'){
+      projectsEl.innerHTML='';
+      DATA.projects.filter(p=>filter==='all' || p.cat.includes(filter)).forEach(p=>{
+        const div=document.createElement('div'); div.className='card';
+        div.innerHTML=`<h3>${p.name}</h3><p class="sub">${p.tech}</p><p>${p.desc}</p>`;
+        projectsEl.appendChild(div);
+      });
+    }
+    renderProjects();
+
+    document.querySelectorAll('.filter-btn').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        document.querySelectorAll('.filter-btn').forEach(b=>b.setAttribute('aria-pressed','false'));
+        btn.setAttribute('aria-pressed','true');
+        renderProjects(btn.dataset.filter);
+      });
+    });
+
+    // Certifications
+    const certsEl = document.getElementById('certsList');
+    DATA.certs.forEach(c=>{ const li=document.createElement('li'); li.textContent=c; certsEl.appendChild(li); });
+
+    // Contact
+    const contactEl = document.getElementById('contactInfo');
+    contactEl.innerHTML=`<p>Email: <a href="mailto:${DATA.email}">${DATA.email}</a></p>
+                         <p>LinkedIn: <a href="${DATA.linkedin}" target="_blank">${DATA.linkedin}</a></p>
+                         <p>GitHub: <a href="${DATA.github}" target="_blank">${DATA.github}</a></p>`;
+
+    // Simple scroll animation
+    const observer=new IntersectionObserver(entries=>{
+      entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+    }, {threshold:.15});
+    document.querySelectorAll('[data-animate]').forEach(el=>observer.observe(el));
+
+    // Theme toggle
+    const toggle=document.getElementById('themeToggle');
+    toggle.addEventListener('click',()=>{
+      document.documentElement.classList.toggle('dark');
+    });
+  </script>
+</body>
+</html>
